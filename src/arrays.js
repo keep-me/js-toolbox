@@ -70,12 +70,63 @@ export  function  range(start,  end,  step  =  1)  {
 }
 
 /**  Partition  array  into  two  groups  based  on  predicate.  */
-export  function  partition(xs,  fn)  {
-  const  pass  =  [],  fail  =  [];
-  for  (const  x  of  xs)  {
-    (fn(x)  ?  pass  :  fail).push(x);
+export function partition(xs, fn) {
+  const pass = [], fail = [];
+  for (const x of xs) {
+    (fn(x) ? pass : fail).push(x);
   }
-  return  [pass,  fail];
+  return [pass, fail];
+}
+
+/** Deep clone an object or array, handles circular references. */
+export function deepClone(value, seen = new WeakMap()) {
+  if (value === null || typeof value !== 'object') {
+    return value;
+  }
+
+  if (seen.has(value)) {
+    return seen.get(value);
+  }
+
+  if (value instanceof Date) {
+    return new Date(value.getTime());
+  }
+
+  if (value instanceof RegExp) {
+    return new RegExp(value.source, value.flags);
+  }
+
+  const clone = Array.isArray(value) ? [] : {};
+  seen.set(value, clone);
+
+  for (const key in value) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      clone[key] = deepClone(value[key], seen);
+    }
+  }
+
+  return clone;
+}
+
+/** Check if a value is empty. Returns true for empty strings, empty arrays, empty objects, null, and undefined. */
+export function isEmpty(value) {
+  if (value === null || value === undefined) {
+    return true;
+  }
+
+  if (typeof value === 'string') {
+    return value.trim() === '';
+  }
+
+  if (Array.isArray(value)) {
+    return value.length === 0;
+  }
+
+  if (typeof value === 'object') {
+    return Object.keys(value).length === 0;
+  }
+
+  return false;
 }
 
 

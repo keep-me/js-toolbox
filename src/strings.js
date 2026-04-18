@@ -70,10 +70,25 @@ export  function  repeat(s  =  '',  times  =  1)  {
   return  String(s).repeat(Math.max(0,  times));
 }
 
-/**  Escape  HTML  special  characters.  */
-export  function  escapeHtml(s  =  '')  {
-  const  map  =  {  '&':  '&amp;',  '<':  '&lt;',  '>':  '&gt;',  '"':  '&quot;',  "'":  '&#39;'  };
-  return  String(s).replace(/[&<>"']/g,  (char)  =>  map[char]);
+/** Escape HTML special characters. */
+export function escapeHtml(s = '') {
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  return String(s).replace(/[&<>"']/g, (char) => map[char]);
+}
+
+/** Truncate a string from the middle. e.g., "abcdefghij" -> "abc...hij" */
+export function truncateMiddle(s = '', max = 20, ellipsis = '...') {
+  const str = String(s);
+  if (str.length <= max) return str;
+
+  const ellipsisLength = ellipsis.length;
+  const availableLength = max - ellipsisLength;
+  if (availableLength <= 0) return ellipsis.slice(0, max);
+
+  const startLength = Math.ceil(availableLength / 2);
+  const endLength = Math.floor(availableLength / 2);
+
+  return str.slice(0, startLength) + ellipsis + str.slice(str.length - endLength);
 }
 
 

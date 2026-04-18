@@ -10,9 +10,18 @@ assert.equal(strings.reverse('abc'),  'cba');
 assert.equal(strings.camelCase('hello-world'),  'helloWorld');
 assert.equal(strings.snakeCase('HelloWorld'),  'hello_world');
 assert.equal(strings.repeat('x',  3),  'xxx');
-assert.equal(strings.escapeHtml('<div>'),  '&lt;div&gt;');
+assert.equal(strings.escapeHtml('<div>'), '&lt;div&gt;');
 
-console.log('strings  tests  ok');
+// truncateMiddle tests
+assert.equal(strings.truncateMiddle('abcdefghij', 20), 'abcdefghij');
+assert.equal(strings.truncateMiddle('abcdefghij', 9), 'abc...hij');
+assert.equal(strings.truncateMiddle('abcdefghijklmnopqrst', 15), 'abcde...pqrst');
+assert.equal(strings.truncateMiddle('test', 3), '...');
+assert.equal(strings.truncateMiddle('test', 2), '..');
+assert.equal(strings.truncateMiddle('verylongstring', 10, '****'), 'ver****ing');
+assert.equal(strings.truncateMiddle('', 10), '');
+
+console.log('strings tests ok');
 
 
 
