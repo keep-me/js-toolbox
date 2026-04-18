@@ -20,11 +20,15 @@ export  function  kebabCase(s  =  '')  {
     .toLowerCase();
 }
 
-export  function  slugify(s  =  '')  {
-  return  kebabCase(s)
+export function slugify(s = '') {
+  return String(s)
     .normalize('NFKD')
-    .replace(/\p{Diacritic}/gu,  '')
-    .toLowerCase();
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase()
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 export  function  truncate(s  =  '',  max  =  100,  suffix  =  '…')  {

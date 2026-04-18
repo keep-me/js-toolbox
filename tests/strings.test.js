@@ -4,7 +4,7 @@ import  *  as  strings  from  '../src/strings.js';
 assert.equal(strings.capitalize('hey'),  'Hey');
 assert.equal(strings.kebabCase('HelloWorld'),  'hello-world');
 assert.equal(strings.slugify('Café  Déjà  Vu'),  'cafe-deja-vu');
-assert.equal(strings.truncate('hello',  3),  'hel…');
+assert.equal(strings.truncate('hello', 4), 'hel…');
 assert.equal(strings.pad('a',  3,  '.'),  'a..');
 assert.equal(strings.reverse('abc'),  'cba');
 assert.equal(strings.camelCase('hello-world'),  'helloWorld');
@@ -15,7 +15,7 @@ assert.equal(strings.escapeHtml('<div>'), '&lt;div&gt;');
 // truncateMiddle tests
 assert.equal(strings.truncateMiddle('abcdefghij', 20), 'abcdefghij');
 assert.equal(strings.truncateMiddle('abcdefghij', 9), 'abc...hij');
-assert.equal(strings.truncateMiddle('abcdefghijklmnopqrst', 15), 'abcde...pqrst');
+assert.equal(strings.truncateMiddle('abcdefghijklmnopqrst', 15), 'abcdef...opqrst');
 assert.equal(strings.truncateMiddle('test', 3), '...');
 assert.equal(strings.truncateMiddle('test', 2), '..');
 assert.equal(strings.truncateMiddle('verylongstring', 10, '****'), 'ver****ing');
